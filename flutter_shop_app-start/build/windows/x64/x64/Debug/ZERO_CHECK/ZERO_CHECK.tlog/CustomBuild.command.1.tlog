@@ -1,0 +1,10 @@
+^C:\3-R_CURS_HAVAR\MOBILEAPP\LAB11\FLUTTER_SHOP_APP-START\BUILD\WINDOWS\X64\CMAKEFILES\2399FB4918FE2ADC5BB164236B1A1AA2\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/windows -BC:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/shop_app.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

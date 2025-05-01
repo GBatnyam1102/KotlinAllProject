@@ -1,46 +1,115 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/models/product_model.dart';
 import 'package:shop_app/provider/globalProvider.dart';
+import 'package:shop_app/screens/product_detail.dart';
 
 // ignore: must_be_immutable
 class BagsPage extends StatelessWidget {
+  void _onTap(BuildContext context, ProductModel data) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => Product_detail(data)));
+  }
 
   BagsPage({super.key});
- 
-   @override
-  Widget build(BuildContext context) {
 
-      return Consumer<Global_provider>(
-      builder: (context, provider, child) {
-        double total = provider.cartItems.fold(0, (sum, item) => sum + (item.price!));
-        return Scaffold(
-            appBar: AppBar(
-              title: Text('Cart'),
-            ),
-            body: ListView.builder(
-              itemCount: provider.cartItems.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  margin: EdgeInsets.all(8.0),
-                  child: ListTile(
-                    leading: Image.network(
-                      provider.cartItems[index].image!,
-                      width: 50, // Adjust the width as needed
-                      height: 50, // Adjust the height as needed
-                    ),
-                    title: Text(provider.cartItems[index].title!),
-                    subtitle: Text('Quantity: ${provider.cartItems[index].count}'),
-                    // You can add more details if needed, like the price
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<Global_provider>(builder: (context, provider, child) {
+      double total = provider.cartItems
+          .fold(0, (sum, item) => sum + (provider.resultCalc(item)));
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Cart'),
+        ),
+        body: ListView.separated(
+          padding: const EdgeInsets.all(12),
+          itemCount: provider.cartItems.length,
+          separatorBuilder: (_, __) => const SizedBox(height: 16),
+          itemBuilder: (context, index) {
+            final item = provider.cartItems[index];
+            double resTotal = item.count * item.price!;
+            return InkWell(
+              onTap: () => _onTap(context, item),
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          item.image!,
+                          height: 100,
+                          width: 100,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.title!,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                FloatingActionButton.small(
+                                  heroTag: 'remove_$index',
+                                  onPressed: () {
+                                    provider.multiCount(item);
+                                  },
+                                  child: const Icon(Icons.remove),
+                                ),
+                                const SizedBox(width: 16),
+                                Text(
+                                  item.count.toString(),
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                                const SizedBox(width: 16),
+                                FloatingActionButton.small(
+                                  heroTag: 'add_$index',
+                                  onPressed: () {
+                                    provider.addCount(item);
+                                  },
+                                  child: const Icon(Icons.add),
+                                ),
+                                const SizedBox(width: 300),
+                                Text(
+                                  "\$${resTotal.toStringAsFixed(2)}",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              },
-            ),
-            bottomNavigationBar: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
+                ),
+              ),
+            );
+          },
+        ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+               Text(
                     'Total: \$${total.toStringAsFixed(2)}',
                     style: TextStyle(
                       fontSize: 18,
@@ -55,10 +124,10 @@ class BagsPage extends StatelessWidget {
                     },
                     child: Text('Buy All'),
                   ),
-                ],
-              ),
-            ),
-          );
-      });
-}
+            ],
+          ),
+        ),
+      );
+    });
+  }
 }
