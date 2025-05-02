@@ -9,7 +9,7 @@ import 'profile_page.dart';
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   
-List<Widget> Pages = [const ShopPage(), BagsPage(),const FavoritePage(), const ProfilePage()];
+List<Widget> Pages = [const ShopPage(), const BagsPage(),const FavoritePage(), const ProfilePage()];
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

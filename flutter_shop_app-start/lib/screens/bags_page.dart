@@ -11,7 +11,7 @@ class BagsPage extends StatelessWidget {
         context, MaterialPageRoute(builder: (_) => Product_detail(data)));
   }
 
-  BagsPage({super.key});
+  const BagsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class BagsPage extends StatelessWidget {
           .fold(0, (sum, item) => sum + (provider.resultCalc(item)));
       return Scaffold(
         appBar: AppBar(
-          title: Text('Cart'),
+          title: const Text('Cart'),
         ),
         body: ListView.separated(
           padding: const EdgeInsets.all(12),
@@ -39,6 +39,7 @@ class BagsPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
@@ -51,52 +52,66 @@ class BagsPage extends StatelessWidget {
                       ),
                       const SizedBox(width: 16),
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              item.title!,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                item.title!,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 12),
-                            Row(
-                              children: [
-                                FloatingActionButton.small(
-                                  heroTag: 'remove_$index',
-                                  onPressed: () {
-                                    provider.multiCount(item);
-                                  },
-                                  child: const Icon(Icons.remove),
-                                ),
-                                const SizedBox(width: 16),
-                                Text(
-                                  item.count.toString(),
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                                const SizedBox(width: 16),
-                                FloatingActionButton.small(
-                                  heroTag: 'add_$index',
-                                  onPressed: () {
-                                    provider.addCount(item);
-                                  },
-                                  child: const Icon(Icons.add),
-                                ),
-                                const SizedBox(width: 300),
-                                Text(
-                                  "\$${resTotal.toStringAsFixed(2)}",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                              const SizedBox(height: 12),
+                              Row(
+                                children: [
+                                  FloatingActionButton.small(
+                                    heroTag: 'remove_$index',
+                                    onPressed: () {
+                                      provider.multiCount(item);
+                                    },
+                                    child: const Icon(Icons.remove),
                                   ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                                  const SizedBox(width: 16),
+                                  Text(
+                                    item.count.toString(),
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  FloatingActionButton.small(
+                                    heroTag: 'add_$index',
+                                    onPressed: () {
+                                      provider.addCount(item);
+                                    },
+                                    child: const Icon(Icons.add),
+                                  ),
+                                  const SizedBox(width: 300),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    provider.deleteItemCart(item);
+                                  },
+                                  icon: const Icon(Icons.cancel)),
+                              Text(
+                                "\$${resTotal.toStringAsFixed(2)}",
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      )),
                     ],
                   ),
                 ),
@@ -109,21 +124,21 @@ class BagsPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-               Text(
-                    'Total: \$${total.toStringAsFixed(2)}',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Implement buy all logic
-                      // For example, you might want to navigate to a checkout page
-                      // or display a confirmation dialog.
-                    },
-                    child: Text('Buy All'),
-                  ),
+              Text(
+                'Total: \$${total.toStringAsFixed(2)}',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Implement buy all logic
+                  // For example, you might want to navigate to a checkout page
+                  // or display a confirmation dialog.
+                },
+                child: const Text('Buy All'),
+              ),
             ],
           ),
         ),

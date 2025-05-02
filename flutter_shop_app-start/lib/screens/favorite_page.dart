@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_app/models/product_model.dart';
 import 'package:shop_app/provider/globalProvider.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -46,31 +45,39 @@ class FavoritePage extends StatelessWidget {
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.title!,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.title!,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 12),
-                              
-
-                              const SizedBox(height: 12),
-                              Text(
-                                item.price.toString(),
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                                const SizedBox(height: 12),
+                                buildStarRating(item.rating!.rate!),
+                                const SizedBox(height: 12),
+                                Text(
+                                  "\$${item.price}",
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              
-                            ],
-                          ),
-                        ),
+                              ],
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                provider.deletItem(item);
+                              },
+                              icon: const Icon(Icons.cancel),
+                            )
+                          ],
+                        )),
                       ],
                     ),
                   ),
@@ -80,6 +87,21 @@ class FavoritePage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget buildStarRating(double rating) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(5, (index) {
+        if (index < rating.floor()) {
+          return const Icon(Icons.star, color: Colors.amber);
+        } else if (index < rating && rating - index >= 0.5) {
+          return const Icon(Icons.star_half, color: Colors.amber);
+        } else {
+          return const Icon(Icons.star_border, color: Colors.amber);
+        }
+      }),
     );
   }
 }

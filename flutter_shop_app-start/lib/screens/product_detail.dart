@@ -39,7 +39,7 @@ class Product_detail extends StatelessWidget {
             String itemName = product.title!;
             ScaffoldMessenger.of(context).showSnackBar( SnackBar(
               content: Text(" $itemName Барааг амжилттай сагсанд нэмлээ"),
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 1),
               backgroundColor: Colors.blue,
             ));
             provider.addCartItems(product);

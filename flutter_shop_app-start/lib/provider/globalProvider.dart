@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/product_model.dart';
 
@@ -8,6 +6,19 @@ class Global_provider extends ChangeNotifier {
   List<ProductModel> products = [];
   List<ProductModel> cartItems = [];
   List<ProductModel> favoriteItems = [];
+  List<String> promotionCodes = [
+    "png1254",
+    "SUMMER25",
+    "FALLSAVE10",
+    "WELCOME5",
+    "FREESHIPNOW",
+    "BUNDLEUP",
+    "NEWYEAR20",
+    "SPRINGBLOOM",
+    "LUCKY77",
+    "GETIT15",
+    "THANKYOU"
+  ];
   int currentIdx = 0;
   double result = 0;
   void setProducts(List<ProductModel> data) {
@@ -66,5 +77,15 @@ class Global_provider extends ChangeNotifier {
   double resultCalc(ProductModel data) {
     result = data.count * data.price!;
     return result;
+  }
+
+  void deletItem(ProductModel data) {
+    favoriteItems.remove(data);
+    notifyListeners();
+  }
+
+  void deleteItemCart(ProductModel data) {
+    cartItems.remove(data);
+    notifyListeners();
   }
 }
