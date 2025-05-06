@@ -1,0 +1,1 @@
+ C:\\3-r_curs_havar\\MobileApp\\Lab11\\flutter_shop_app-start\\.dart_tool\\flutter_build\\66b6f7cf1bc2b8b54df655fa7506f7f6\\native_assets.json: 

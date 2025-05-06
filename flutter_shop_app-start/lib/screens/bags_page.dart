@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/models/product_model.dart';
+import 'package:shop_app/models/users.dart';
 import 'package:shop_app/provider/globalProvider.dart';
 import 'package:shop_app/screens/product_detail.dart';
 
@@ -133,9 +134,22 @@ class BagsPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Implement buy all logic
-                  // For example, you might want to navigate to a checkout page
-                  // or display a confirmation dialog.
+                  if (provider.islog) {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("Төлбөр баталгаажуулах"),
+                            content: Text("Нийт төлбөр:${total}"),
+                          );
+                        });
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content:
+                            Text("Худалдан авалт хийхийн тулд нэвтэрнэ үү."),
+                            backgroundColor: Colors.blue,),
+                            );
+                  }
                 },
                 child: const Text('Buy All'),
               ),

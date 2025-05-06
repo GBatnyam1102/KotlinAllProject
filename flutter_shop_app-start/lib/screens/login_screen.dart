@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/models/users.dart';
 import 'package:shop_app/provider/globalProvider.dart';
 import 'package:shop_app/screens/signup_screen.dart';
 
@@ -108,13 +109,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) => const SignupScreen(),
+                                        builder: (context) =>
+                                            const SignupScreen(),
                                       ),
                                     );
                                   },
                                   style: TextButton.styleFrom(
                                     foregroundColor: Colors.black,
-                                    textStyle:const  TextStyle(
+                                    textStyle: const TextStyle(
                                       decoration: TextDecoration.underline,
                                     ),
                                   ),
@@ -132,25 +134,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: OutlinedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          // bool isLoggedIn = provider.checkLogin(
-                          //   _usernameController.text.trim(),
-                          //   _passwordController.text.trim(),
-                          // );
-                          // if (isLoggedIn) {
-                          //   Navigator.of(context).push(
-                          //     MaterialPageRoute(
-                          //       builder: (context) => ExampleDragAndDrop(),
-                          //     ),
-                          //   );
-                          // } else {
-                          //   ScaffoldMessenger.of(context).showSnackBar(
-                          //     SnackBar(
-                          //       content: Text(
-                          //         'Нэвтрэх нэр эсвэл нууц үг буруу байна!',
-                          //       ),
-                          //     ),
-                          //   );
-                          // }
+                          UserModel? isLoggedIn = provider.isLoggedIn(
+                            _usernameController.text.trim(),
+                            _passwordController.text.trim(),
+                          );
+                          if (isLoggedIn != null) {
+                            Navigator.of(context).pop();
+                            provider.changeUser(isLoggedIn.username.toString(),
+                                isLoggedIn.email.toString());
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'Нэвтрэх нэр эсвэл нууц үг буруу байна!',
+                                ),
+                              ),
+                            );
+                          }
                         }
                       },
                       style: OutlinedButton.styleFrom(

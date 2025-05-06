@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/product_model.dart';
+import 'package:shop_app/models/users.dart';
 
 // ignore: camel_case_types
 class Global_provider extends ChangeNotifier {
   List<ProductModel> products = [];
   List<ProductModel> cartItems = [];
   List<ProductModel> favoriteItems = [];
+  List<UserModel> users = [];
+  bool islog = false;
   List<String> promotionCodes = [
     "png1254",
     "SUMMER25",
@@ -19,10 +22,43 @@ class Global_provider extends ChangeNotifier {
     "GETIT15",
     "THANKYOU"
   ];
+  String username = "";
+  String email = "";
   int currentIdx = 0;
   double result = 0;
   void setProducts(List<ProductModel> data) {
     products = data;
+    notifyListeners();
+  }
+
+  void setUsers(List<UserModel> data) {
+    users = data;
+    notifyListeners();
+  }
+
+  bool checkUserLogin(UserModel user) {
+    if (user.username == "" && user.email == "") {
+      islog = false;
+      return false;
+    }
+    islog = true;
+    return true;
+  }
+
+  UserModel? isLoggedIn(String userName, String passWord) {
+    for (var user in users) {
+      if (user.username == userName && user.password == passWord) {
+        islog = true;
+        return user;
+      }
+    }
+    islog = false;
+    return null;
+  }
+
+  void changeUser(String uName, String uEmail) {
+    username = uName;
+    email = uEmail;
     notifyListeners();
   }
 

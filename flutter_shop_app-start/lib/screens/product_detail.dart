@@ -37,7 +37,7 @@ class Product_detail extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             String itemName = product.title!;
-            ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(" $itemName Барааг амжилттай сагсанд нэмлээ"),
               duration: const Duration(seconds: 1),
               backgroundColor: Colors.blue,

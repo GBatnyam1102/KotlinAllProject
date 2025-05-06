@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/provider/globalProvider.dart';
@@ -60,11 +62,20 @@ class ProductViewShop extends StatelessWidget {
                         children: [
                           IconButton(
                             onPressed: () {
-                              provider.setFavorite(data);
+                              if (provider.islog) {
+                                provider.setFavorite(data);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            "Та хэрэглэгчийн эрхээр нэвтрээгүй байна"),
+                                            backgroundColor: Colors.blue,));
+                                    
+                              }
                             },
                             icon: Icon(
                               Icons.favorite,
-                              color: data.isFavorite
+                              color: provider.islog && data.isFavorite
                                   ? Colors.red // if favorited → red
                                   : Colors.grey, // else → grey
                             ),

@@ -1,0 +1,13 @@
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/CMakeFiles/INSTALL.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/CMakeFiles/ALL_BUILD.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/CMakeFiles/ZERO_CHECK.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/flutter/CMakeFiles/flutter_wrapper_app.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/flutter/CMakeFiles/flutter_assemble.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/flutter/CMakeFiles/INSTALL.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/runner/CMakeFiles/shop_app.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/runner/CMakeFiles/INSTALL.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/runner/CMakeFiles/ALL_BUILD.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/plugins/dynamic_color/CMakeFiles/dynamic_color_plugin.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/plugins/dynamic_color/CMakeFiles/INSTALL.dir
+C:/3-r_curs_havar/MobileApp/Lab11/flutter_shop_app-start/build/windows/x64/plugins/dynamic_color/CMakeFiles/ALL_BUILD.dir
